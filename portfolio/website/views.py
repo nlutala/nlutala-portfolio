@@ -1,7 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
 
 def index(request):
-    return HttpResponse("The start of nlutala's portfolio website.")
+    return render(request, "website/index.html")
