@@ -34,91 +34,96 @@
     </div>
   </nav>
   <div class="container-fluid">
-    <h1>Skills</h1>
-    <div class="container-fluid">
-      <div id="carouselExampleCaptions" class="carousel slide" style="text-align: center;">
-        <div class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
-            aria-current="true" aria-label="Slide 1" style="background-color: #212529;"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"
-            style="background-color: #212529;"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"
-            style="background-color: #212529;"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"
-            style="background-color: #212529;"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"
-            style="background-color: #212529;"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"
-            style="background-color: #212529;"></button>
-          <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="6" aria-label="Slide 7"
-            style="background-color: #212529;"></button>
-        </div>
-        <div class="carousel-inner">
-          <div class="carousel-item active" style="padding: 15px 15px;">
-            <p class="fs-1">Python</p>
-          </div>
-          <div class="carousel-item" style="padding: 15px 15px;">
-            <p class="fs-1">Java</p>
-          </div>
-          <div class="carousel-item" style="padding: 15px 15px;">
-            <p class="fs-1">C#</p>
-          </div>
-          <div class="carousel-item" style="padding: 15px 15px;">
-            <p class="fs-1">SQL</p>
-          </div>
-          <div class="carousel-item" style="padding: 15px 15px;">
-            <p class="fs-1">Git</p>
-          </div>
-          <div class="carousel-item" style="padding: 15px 15px;">
-            <p class="fs-1">AWS Services</p>
-          </div>
-          <div class="carousel-item" style="padding: 15px 15px;">
-            <p class="fs-1">Isabelle/HOL</p>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+            aria-controls="panelsStayOpen-collapseOne">
+            Introduction
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+          <div class="accordion-body">
+            I aspire to pursue a career in the technology industry. Apart from the industry revolving around efficient
+            algorithm use and problem-solving, it also centres on learning, which I find enjoyable. The exposure to
+            learning music formally in secondary school has led me to teach myself how to play the keyboard. In the same
+            way, Computer Scientists are continuously learning as they are always searching for more efficient
+            algorithms for our mundane problems. Throughout this ongoing experience, I have realised that learning is
+            not limited to acquiring more knowledge; it also includes finding ways to use your skills and experiences to
+            achieve something different. I hope to continue this journey and have more opportunities to grow
+            holistically throughout my career.
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"><img src="{% static '/chevron-left.svg' %}"
-              alt="left arrow"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-          data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"><img src="{% static '/chevron-right.svg' %}"
-              alt="right arrow"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+            aria-controls="panelsStayOpen-collapseTwo">
+            Skills
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            In no particular order, I am familiar with the following technologies: Python, Java, C#, SQL (Microsoft SQL
+            Server, T-SQL), Git, AWS Services, Isabelle/HOL, HTML, CSS and JavaScript.
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
+            aria-controls="panelsStayOpen-collapseThree">
+            Experience
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            While studying Computer Science at university, I was lucky to have the chance to work in the digital
+            marketing industry with programmatic direct mail. I worked part-time as an Operations Developer, where my
+            role was mainly as a mentor, guiding Junior Operations Developers on how to set up campaigns and their
+            maintenance. As an Operations Developer, I successfully assisted my mentees in launching postal marketing
+            campaigns for six clients.</br></br>
+
+            Before this, I was a Junior Operations Developer in a position similar to the intelligent and motivated
+            people I mentored during my industrial placement. Here, I:
+
+            <ul>
+              <li>Used and developed my skills in HTML, CSS and JavaScript (Angular.js) to contribute to a local
+                template to create direct mail marketing templates</li>
+              <li>Enhanced a Shopify API hook using C# to increase customer segmentation for approximately 11% of the
+                client base</li>
+              <li>Created an automation tool using Python and collaborated with other developers to make use of AWS
+                Services including AWS Lambda, AWS Codepipeline and AWS CodeCommit, to streamline the management of
+                weekly invoices and increase productivity by 50% (decreased a process that was previously 4 hours to 2
+                hours)</li>
+              <li>Developed an automated email alerting system to assist with account reconciliation using T-SQL</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false"
+            aria-controls="panelsStayOpen-collapseFour">
+            Education
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse">
+          <div class="accordion-body">
+            I attended King's College London to obtain a BSc in Computer Science with a year in industry. I was also
+            awarded the Associate of King's College London (AKC) certification through a course designed for students
+            to develop an inquiring mind and learn about topics beyond their field of study.
+          </div>
+        </div>
       </div>
     </div>
-
-    <h1>Experience</h1>
-    <p>
-      During my time at university, I was lucky to have the chance to work as an Operations Developer.
-    </p>
-    <p>
-      Here, I:
-    </p>
-    <ul>
-      <li>Trained and mentored a small group of Junior Operations Developers on how to set up campaigns and how to
-        maintain
-        them. During my time there, they <b>successfully lauched 6 new campaigns</b> for clients.</li>
-      <li>Used and developed my skills in <b>HTML</b>, <b>CSS</b>, <b>JavaScript</b> and some <b>Angular.js</b> to
-        contribute to a local template to create direct mail marketing templates.</li>
-      <li>Enhanced a Shopify <b>API</b> hook using <b>C#</b> to <b>increase customer segmentation for ~11% of the client
-          base.</b></li>
-      <li>Created an automation tool using <b>Python</b> and collaborated with other developers using <b>AWS
-          Services</b> including AWS Lambda, AWS Codepipeline and AWS CodeCommit, to streamline the management of weekly
-        invoices to <b>increase productivity by 50%</b>.</li>
-      <li>Implemented an email notification system to report any anomalies on customer activity on client's website
-        through website
-        scripts using <b>Python</b> and <b>AWS Services</b> including AWS Lambda, AWS Codepipeline, AWS CodeCommit and
-        AWS Simple Email Service.</li>
-      <li>Developed an automated email alerting system to assist with account reconciliation using <b>T-SQL</b>.</li>
-    </ul>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
 </body>
 
 </html>
