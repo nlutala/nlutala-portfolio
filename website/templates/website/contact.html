@@ -13,7 +13,7 @@
 <body style="padding: 15px 15px;">
   <nav class="navbar" style="border-radius: 1%;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Nathan Lutala</a>
+      <a class="navbar-brand" href="/" style="color: #212529;">Nathan Lutala</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -40,23 +40,25 @@
       <div class="row row-cols-1 row-cols-md-2 g-4">
         <div class="col">
           <div class="card h-100">
-            <a href="https://github.com/nlutala" target="_blank"><img class="img-fluid"
-                src="{% static '/github-mark.png' %}" alt="GitHub logo"></a>
-            <div class="card-body">
-              <h5 class="card-title">GitHub</h5>
-              <p class="card-text">nlutala</p>
-            </div>
+            <a href="https://github.com/nlutala" target="_blank" style="text-decoration: none; color: #212529;">
+              <img class="img-fluid" src="{% static '/github-mark.png' %}" alt="GitHub logo" style="height: 80px; width: 80;">
+              <div class="card-body">
+                <h5 class="card-title">GitHub</h5>
+                <p class="card-text">nlutala</p>
+            </a>
           </div>
         </div>
-        <div class="col">
-          <div class="card h-100">
-            <a href="https://www.linkedin.com/in/nathanlutala/" target="_blank"><img class="img-fluid"
-                src="{% static '/LinkedIn-Blue-128.png' %}" alt="LinkedIn logo"></a>
+      </div>
+      <div class="col">
+        <div class="card h-100">
+          <a href="https://www.linkedin.com/in/nathanlutala/" target="_blank"
+            style="text-decoration: none; color: #212529;">
+            <img class="img-fluid" src="{% static '/LinkedIn-Blue-40.png' %}" alt="LinkedIn logo">
             <div class="card-body">
               <h5 class="card-title">LinkedIn</h5>
               <p class="card-text">Nathan Lutala</p>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </div>
