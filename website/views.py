@@ -14,6 +14,12 @@ def projects(request):
     '''
     return render(request, "website/projects.html")
 
+def pdf_merger(request):
+    '''
+    Returns a page with a the PDF Merger project to try out.
+    '''
+    return render(request, "website/pdf_merger.html")
+
 def contact(request):
     '''
     Returns a page with where to contact/follow me (Github & LinkedIn).

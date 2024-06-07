@@ -24,5 +24,6 @@ urlpatterns = [
     path("", include("website.urls")),
     path("projects", include("website.urls")),
     path("contact", include("website.urls")),
+    path("projects/pdf-merger", include("website.urls"))
     # path("admin/", admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
