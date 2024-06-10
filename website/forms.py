@@ -3,6 +3,5 @@ from multiupload.fields import MultiFileField
 
 
 class PDFMergerForm(forms.Form):
-    formFileMultiple = MultiFileField(label="Attachments", min_num=2)
-    mergedFileName = forms.CharField(label="Merged file name", required=False)
-    
+    uploadedFiles = MultiFileField()
+    mergedFilename = forms.CharField(label="Merged file name", required=False)

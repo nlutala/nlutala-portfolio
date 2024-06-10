@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from .forms import PDFMergerForm
+from django.http import FileResponse
+from .projects.pdf_merger import PDFMerger
+import os
 
 # Create your views here.
 
@@ -19,14 +21,30 @@ def pdf_merger(request):
     '''
     Returns a page with a the PDF Merger project to try out.
     '''
+    merger = PDFMerger()
+    BASE_DIR = merger.get_base_dir()
+    
     if request.method == "POST":
-        form = PDFMergerForm(request.POST)
-        if form.is_valid():
-            return render(request, "website/pdf_merger_1.html")
-    else:
-        form = PDFMergerForm()
+        pdfs = [file.name for file in request.FILES.getlist('formFileMultiple')]
         
-    return render(request, "website/pdf_merger.html", {"form" : form})
+        for file in request.FILES.getlist('formFileMultiple'):
+            file_path = os.path.join(BASE_DIR, file.name)
+            with open(file_path, 'wb+') as new_file:
+                for chunk in file.chunks():
+                    new_file.write(chunk)
+        
+        merger.add_pdf_files(pdfs)
+        filename = merger.merge_pdfs(request.FILES.get('mergedFileName', ""))
+        pdf = open(filename, 'rb')
+        response = FileResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = f'inline; filename="{filename}"'
+        return response
+    else:
+        for file in os.listdir(BASE_DIR):
+            if file.endswith(".pdf"):
+                os.remove(os.path.join(BASE_DIR, file))
+        
+    return render(request, "website/pdf_merger.html")
 
 def contact(request):
     '''
