@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .forms import PDFMergerForm
 
 # Create your views here.
 
@@ -18,7 +19,14 @@ def pdf_merger(request):
     '''
     Returns a page with a the PDF Merger project to try out.
     '''
-    return render(request, "website/pdf_merger.html")
+    if request.method == "POST":
+        form = PDFMergerForm(request.POST)
+        if form.is_valid():
+            return render(request, "website/pdf_merger_1.html")
+    else:
+        form = PDFMergerForm()
+        
+    return render(request, "website/pdf_merger.html", {"form" : form})
 
 def contact(request):
     '''
