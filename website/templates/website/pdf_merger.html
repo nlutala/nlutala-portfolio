@@ -47,7 +47,7 @@
         {% csrf_token %}
         <div class="mb-3">
           <label for="formFileMultiple" class="form-label">Enter 2 or more PDF files you would like to merge</label>
-          <input class="form-control" type="file" accept=".pdf" id="formFileMultiple" name="formFileMultiple" multiple />
+          <input class="form-control" type="file" accept=".pdf" id="formFileMultiple" name="formFileMultiple" required multiple/>
         </div>
         <div class="mb-3">
           <label for="mergedFileName" class="form-label">Merged file name</label>

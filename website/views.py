@@ -27,6 +27,9 @@ def pdf_merger(request):
     if request.method == "POST":
         pdfs = [file.name for file in request.FILES.getlist('formFileMultiple')]
         
+        if len(pdfs) < 2:
+            return render(request, "website/pdf_merger.html")
+        
         for file in request.FILES.getlist('formFileMultiple'):
             file_path = os.path.join(BASE_DIR, file.name)
             with open(file_path, 'wb+') as new_file:
@@ -34,8 +37,13 @@ def pdf_merger(request):
                     new_file.write(chunk)
         
         merger.add_pdf_files(pdfs)
-        filename = merger.merge_pdfs(request.FILES.get('mergedFileName', ""))
-        pdf = open(filename, 'rb')
+        filename = merger.merge_pdfs(request.POST.get('mergedFileName'))
+        
+        if filename.endswith(".pdf"):
+            pdf = open(filename, 'rb')
+        else:
+            pdf = open(f'{filename}.pdf', 'rb')
+            
         response = FileResponse(pdf, content_type='application/pdf')
         response['Content-Disposition'] = f'inline; filename="{filename}"'
         return response
