@@ -13,6 +13,10 @@ class PDFMerger():
         '''
         self.pdfs = []
         self.base_dir = os.path.dirname(__file__)
+        self.merger = PdfWriter()
+        
+    def get_pdfs(self) -> list:
+        return self.pdfs
         
     def get_base_dir(self) -> str:
         return self.base_dir
@@ -23,8 +27,6 @@ class PDFMerger():
             raise ValueError("There are no PDF files in this directory to merge.")
         elif len(self.pdfs) == 1:
             raise ValueError("There is only PDF file in this directory. There needs to be 2 or more PDF files in this directory to merge.")
-
-        self.merger = PdfWriter()
 
     def merge_pdfs(self, filename: str):
         '''
