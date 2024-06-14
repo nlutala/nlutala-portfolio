@@ -60,7 +60,19 @@ def password_generator(request):
     Returns a page with a demo of the password generator to try out.
     '''
     pg = PasswordGenerator()
-    passwords = pg.generate_password(num_numbers=2, num_symbols=2, num_uppercase=2)
+
+    if request.method == "POST":
+        length = int(request.POST.get('passwordLength'))
+        num_numbers = int(request.POST.get('numNumbers'))
+        num_symbols = int(request.POST.get('numSymbols'))
+        num_uppercase = int(request.POST.get('numUppercase'))
+        print(length, num_numbers, num_symbols, num_uppercase)
+
+        # Wrap this in a try-except and make an alert for the validation
+        passwords = pg.generate_password(length=length, num_numbers=num_numbers, num_symbols=num_symbols, num_uppercase=num_uppercase)
+    else:
+        passwords = pg.generate_password(num_numbers=2, num_symbols=2, num_uppercase=2)
+
     return render(request, "website/password_generator.html", {"passwords": passwords})
 
 def contact(request):
