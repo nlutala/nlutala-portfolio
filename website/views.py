@@ -69,7 +69,6 @@ def password_generator(request):
         num_symbols = int(request.POST.get('numSymbols'))
         num_uppercase = int(request.POST.get('numUppercase'))
 
-        # Wrap this in a try-except and make an alert for the validation
         try:
             passwords = pg.generate_password(
                 length=length, num_numbers=num_numbers, 
