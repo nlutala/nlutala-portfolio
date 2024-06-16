@@ -8,36 +8,12 @@ class TestViews(TestCase):
         assert response.status_code == 200
         assert response['content-type'] == "text/html; charset=utf-8"
 
-    def test_projects_page_is_accessible_from_index(self):
-        client = Client()
-        response = client.get("")
-        response = client.get("/projects")
-        assert response.status_code == 200
-
-    def test_contact_page_is_accessible_from_index(self):
-        client = Client()
-        response = client.get("")
-        response = client.get("/contact")
-        assert response.status_code == 200
-
     # ============== Tests for the projects view ====================
     def test_projects_is_accessible(self):
         client = Client()
         response = client.get("/projects")
         assert response.status_code == 200
         assert response['content-type'] == "text/html; charset=utf-8"
-
-    def test_index_page_is_accessible_from_projects(self):
-        client = Client()
-        response = client.get("/projects")
-        response = client.get("")
-        assert response.status_code == 200
-
-    def test_contact_page_is_accessible_from_projects(self):
-        client = Client()
-        response = client.get("/projects")
-        response = client.get("/contact")
-        assert response.status_code == 200
 
     '''
     Tests for the PDF Merger page
@@ -48,23 +24,20 @@ class TestViews(TestCase):
         assert response.status_code == 200
         assert response['content-type'] == "text/html; charset=utf-8"
 
-    def test_projects_is_accessible_from_pdf_merger(self):
+    '''
+    Test for the Password Generator page
+    '''
+    def test_password_generator_is_accessible_without_slash(self):
         client = Client()
-        response = client.get("/projects/pdf-merger")
-        response = client.get("/projects")
+        response = client.get("/projects/password-generator")
         assert response.status_code == 200
+        assert response['content-type'] == "text/html; charset=utf-8"
 
-    def test_home_is_accessible_from_pdf_merger(self):
+    def test_password_generator_is_accessible_with_slash(self):
         client = Client()
-        response = client.get("/projects/pdf-merger")
-        response = client.get("")
+        response = client.get("/projects/password-generator/")
         assert response.status_code == 200
-
-    def test_contact_is_accessible_from_pdf_merger(self):
-        client = Client()
-        response = client.get("/projects/pdf-merger")
-        response = client.get("/contact")
-        assert response.status_code == 200
+        assert response['content-type'] == "text/html; charset=utf-8"
 
     # ============== Tests for the contact view ====================
     def test_contact_is_accessible(self):
@@ -72,15 +45,3 @@ class TestViews(TestCase):
         response = client.get("/contact")
         assert response.status_code == 200
         assert response['content-type'] == "text/html; charset=utf-8"
-
-    def test_index_page_is_accessible_from_contact(self):
-        client = Client()
-        response = client.get("/contact")
-        response = client.get("")
-        assert response.status_code == 200
-
-    def test_projects_page_is_accessible_from_contact(self):
-        client = Client()
-        response = client.get("/contact")
-        response = client.get("/projects")
-        assert response.status_code == 200
