@@ -59,7 +59,7 @@ def password_generator(request):
     '''
     Returns a page with a demo of the password generator to try out.
     '''
-    pg = PasswordGenerator()
+    pg = PasswordGenerator(8)
     display_warning = False
     warning_text = ""
 
