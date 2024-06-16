@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import FileResponse
 from .projects.pdf_merger import PDFMerger
 from .projects.password_generator import PasswordGenerator
+from .projects.hangman import Hangman
+from .projects.random_letter import RandomLetter
+from .projects.random_hangman_word import RandomHangmanWord
 import os
 
 # Create your views here.
@@ -95,6 +98,12 @@ def password_generator(request):
         "display_warning": display_warning, 
         "warning_text": warning_text
         })
+
+def hangman(request):
+    '''
+    Returns a page with a demo of the hangman game.
+    '''
+    return render(request, "website/hangman.html")
 
 def contact(request):
     '''
