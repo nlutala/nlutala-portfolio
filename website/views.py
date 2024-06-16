@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import FileResponse
 from .projects.pdf_merger import PDFMerger
+from .projects.password_generator import PasswordGenerator
 import os
 
 # Create your views here.
@@ -19,7 +20,7 @@ def projects(request):
 
 def pdf_merger(request):
     '''
-    Returns a page with a the PDF Merger project to try out.
+    Returns a page with a demo of the PDF Merger project to try out.
     '''
     merger = PDFMerger()
     BASE_DIR = merger.get_base_dir()
@@ -53,6 +54,48 @@ def pdf_merger(request):
                 os.remove(os.path.join(BASE_DIR, file))
         
     return render(request, "website/pdf_merger.html")
+
+def password_generator(request):
+    '''
+    Returns a page with a demo of the password generator to try out.
+    '''
+    pg = PasswordGenerator()
+    display_warning = False
+    warning_text = ""
+
+    if request.method == "POST":
+        length = int(request.POST.get('passwordLength'))
+        num_numbers = int(request.POST.get('numNumbers'))
+        num_symbols = int(request.POST.get('numSymbols'))
+        num_uppercase = int(request.POST.get('numUppercase'))
+
+        # Wrap this in a try-except and make an alert for the validation
+        try:
+            passwords = pg.generate_password(
+                length=length, num_numbers=num_numbers, 
+                num_symbols=num_symbols, num_uppercase=num_uppercase
+                )
+        except ValueError as text:
+            display_warning = True
+            warning_text = text
+            passwords = []
+    else:
+        passwords = pg.generate_password(
+            num_numbers=2, num_symbols=2, num_uppercase=2
+            )
+
+    if display_warning == True:
+        return render(request, "website/password_generator.html", {
+            "passwords": passwords, 
+            "display_warning": display_warning, 
+            "warning_text": warning_text
+            })
+
+    return render(request, "website/password_generator.html", {
+        "passwords": passwords, 
+        "display_warning": display_warning, 
+        "warning_text": warning_text
+        })
 
 def contact(request):
     '''

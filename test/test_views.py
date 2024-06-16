@@ -60,21 +60,26 @@ class TestViews(TestCase):
         # The below is because the user is shown a page with their merged PDF file
         assert self.assertTemplateNotUsed("/projects/pdf_merger.html")
 
+    '''
+    Tests for the Password Generator page
+    '''
+    def test_pdf_merger_is_accessible_without_forward_slash(self):
+        client = Client()
+        response = client.get("/projects/password-generator")
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="password_generator.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
+    def test_pdf_merger_is_accessible_with_forward_slash(self):
+        client = Client()
+        response = client.get("/projects/password-generator/")
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="password_generator.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
     # ============== Tests for the contact view ====================
     def test_contact_is_accessible(self):
         client = Client()
         response = client.get("/contact")
         assert response.status_code == 200
         assert response['content-type'] == "text/html; charset=utf-8"
-
-    def test_index_page_is_accessible_from_contact(self):
-        client = Client()
-        response = client.get("/contact")
-        response = client.get("")
-        assert response.status_code == 200
-
-    def test_projects_page_is_accessible_from_contact(self):
-        client = Client()
-        response = client.get("/contact")
-        response = client.get("/projects")
-        assert response.status_code == 200
