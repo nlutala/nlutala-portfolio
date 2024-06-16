@@ -60,20 +60,42 @@ def password_generator(request):
     Returns a page with a demo of the password generator to try out.
     '''
     pg = PasswordGenerator()
+    display_warning = False
+    warning_text = ""
 
     if request.method == "POST":
         length = int(request.POST.get('passwordLength'))
         num_numbers = int(request.POST.get('numNumbers'))
         num_symbols = int(request.POST.get('numSymbols'))
         num_uppercase = int(request.POST.get('numUppercase'))
-        print(length, num_numbers, num_symbols, num_uppercase)
 
         # Wrap this in a try-except and make an alert for the validation
-        passwords = pg.generate_password(length=length, num_numbers=num_numbers, num_symbols=num_symbols, num_uppercase=num_uppercase)
+        try:
+            passwords = pg.generate_password(
+                length=length, num_numbers=num_numbers, 
+                num_symbols=num_symbols, num_uppercase=num_uppercase
+                )
+        except ValueError as text:
+            display_warning = True
+            warning_text = text
+            passwords = []
     else:
-        passwords = pg.generate_password(num_numbers=2, num_symbols=2, num_uppercase=2)
+        passwords = pg.generate_password(
+            num_numbers=2, num_symbols=2, num_uppercase=2
+            )
 
-    return render(request, "website/password_generator.html", {"passwords": passwords})
+    if display_warning == True:
+        return render(request, "website/password_generator.html", {
+            "passwords": passwords, 
+            "display_warning": display_warning, 
+            "warning_text": warning_text
+            })
+
+    return render(request, "website/password_generator.html", {
+        "passwords": passwords, 
+        "display_warning": display_warning, 
+        "warning_text": warning_text
+        })
 
 def contact(request):
     '''

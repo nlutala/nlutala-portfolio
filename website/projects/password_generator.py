@@ -46,7 +46,7 @@ class PasswordGenerator:
                 # Check constraints:
                 constraints = kwargs.get("num_numbers", 0) + kwargs.get("num_uppercase", 0) + kwargs.get("num_symbols", 0)
                 if length < constraints:
-                    raise ValueError(f"The password is set to be {length} characters long, but the amount of numbers, uppercase letters and symbols to be added into the password is {constraints}.")
+                    raise ValueError(f"The password is set to be {length} characters long, but the amount of numbers, uppercase letters and symbols to be added into the password was {constraints} characters.")
                 
                 # Check each of the values of the extra arguments added
                 if kwargs.get("num_numbers", 0) != 0:
