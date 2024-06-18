@@ -1,4 +1,5 @@
 {% load static %}
+<!-- TODO: Complete the website for the Hangman game across all levels -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,49 +40,11 @@
       </nav>
     </div>
     <div class="container-fluid">
-      <h1>Hangman</h1>
-      <p>The purpose of this project is to create a simple hangman game based on my interpretation. Try it out below.</p>
+      <h1>Hangman: {{ level }}</h1>
+      <p>Try to guess the word below!</p>
     </div>
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-4">
-          <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
-            <nav class="nav nav-pills flex-column">
-              <a class="nav-link" href="#item-1">Instructions</a>
-              <a class="nav-link" href="#item-2">Play Game</a>
-            </nav>
-          </nav>
-        </div>
-      
-        <div class="col-8">
-          <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
-            <div id="item-1">
-              <h4>Instructions</h4>
-              <p>The aim of the game is to guess the randomly generated and hidden word (either by entering a letter or the whole word)</p>
-              <p>After scrolling to the 'Play Game' section below, you will have the option to choose a level (Easy, Medium or Hard) and guess the letters
-                in the word.</p>
-              <p>You will only be allowed to have a certain amount of wrong guesses before you lose the game.</p>
-              <p><b>Note that guessing an incorrect word counts as one guess, and no letters in the word you have guessed which may be in the hidden word will be revealed</b>.</p>
-              <p>If you make the correct guess before your number of guesses run out, you win!</p>
-              <p>Are you ready to play? Scroll down and select a level!</p>
-            </div>
-            <div id="item-2">
-              <h4>Play Game</h4>
-              <form method="post">
-                {% csrf_token %}
-                <select id="level" name="level" class="form-select" aria-label="Select Hangman level">
-                  <option value="Easy">Easy</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Hard">Hard</option>
-                </select>
-                <div style="padding: 15px; text-align: center;">
-                  <input type="submit" value="Play!" class="btn btn-primary btn-lg" />
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+      {{ hidden_word }}
     </div>
     <div class="container-fluid" style="text-align: center;">
       <p>

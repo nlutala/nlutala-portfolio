@@ -15,6 +15,8 @@ urlpatterns = [
     path("projects/pdf-merger/", views.pdf_merger, name="pdf-merger"),
     path("projects/password-generator", views.password_generator, name="password-generator"),
     path("projects/password-generator/", views.password_generator, name="password-generator"),
-    path("projects/hangman", views.hangman, name="hangman"),
-    path("projects/hangman/", views.hangman, name="hangman"),
+    path("projects/hangman", views.hangman_template, name="hangman_template"),
+    path("projects/hangman/", views.hangman_template, name="hangman_template"),
+    path("projects/hangman/game", views.hangman_template, name="hangman_game"),
+    path("projects/hangman/game/", views.hangman_template, name="hangman_game"),
 ]

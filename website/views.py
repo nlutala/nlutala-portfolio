@@ -99,11 +99,30 @@ def password_generator(request):
         "warning_text": warning_text
         })
 
-def hangman(request):
+def hangman_template(request):
+    '''
+    Returns a page with instructions and allows the user to
+    select a level to play the hangman game.
+    '''
+    if request.method == "POST":
+        level = request.POST.get('level')
+        return render(request, "website/hangman_game.html", {"level": level})
+
+    return render(request, "website/hangman.html")
+
+def hangman_game(request):
+    # TODO: Finish implementation
     '''
     Returns a page with a demo of the hangman game.
     '''
-    return render(request, "website/hangman.html")
+    if level == None:
+        render(request, "website/hangman.html")
+
+    if request.method == "POST":
+        level = request.POST.get('level').upper()
+        render(request, "website/hangman_game.html")
+
+    return render(request, "website/hangman_game.html")
 
 def contact(request):
     '''
