@@ -2,10 +2,11 @@
 Tests for the passwordGenerator script
 '''
 
-import random, string, unittest
+from django.test import TestCase
+import random, string
 from website.projects.password_generator import PasswordGenerator
 
-class TestPasswordGenerator(unittest.TestCase):
+class TestPasswordGenerator(TestCase):
     def test_passwordGenerator_raises_valueerror_if_no_num_passwords_are_given(self):
         num_passwords = ""
         with self.assertRaises(ValueError):
