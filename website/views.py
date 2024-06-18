@@ -122,8 +122,6 @@ def hangman_game(request):
         level = request.POST.get('level').upper()
         render(request, "website/hangman_game.html")
 
-    return render(request, "website/hangman_game.html")
-
 def contact(request):
     '''
     Returns a page with where to contact/follow me (Github & LinkedIn).

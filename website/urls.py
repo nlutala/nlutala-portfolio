@@ -17,6 +17,6 @@ urlpatterns = [
     path("projects/password-generator/", views.password_generator, name="password-generator"),
     path("projects/hangman", views.hangman_template, name="hangman_template"),
     path("projects/hangman/", views.hangman_template, name="hangman_template"),
-    path("projects/hangman/game", views.hangman_template, name="hangman_game"),
-    path("projects/hangman/game/", views.hangman_template, name="hangman_game"),
+    path("projects/hangman/game", views.hangman_game, name="hangman_game"),
+    path("projects/hangman/game/", views.hangman_game, name="hangman_game"),
 ]
