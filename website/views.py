@@ -117,7 +117,7 @@ def hangman_template(request):
         else:
             number_of_guesses = len(hangman_word) + 3
 
-        hangman_db = HangmanGames(
+        hangman_db = HangmanGames.objects.create(
             level=level.upper(),
             word=hangman_word,
             number_of_guesses=number_of_guesses,
@@ -125,9 +125,21 @@ def hangman_template(request):
             date_played=str(datetime.datetime.now())
         )
         hangman_db.save()
-        return render(request, "website/hangman.html", {"level": level})
+        return render(request, "website/hangman_game.html", {"level": level})
 
     return render(request, "website/hangman.html")
+
+def hangman_game(request):
+    '''
+    Returns a page with instructions and allows the user to
+    select a level to play the hangman game.
+    '''
+    print(HangmanGames.objects.values_list("word", flat=True))
+
+    if request.method == "POST":
+        return render(request, "website/hangman_game.html")
+
+    return render(request, "website/hangman_game.html")
 
 def contact(request):
     '''
