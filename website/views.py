@@ -1,11 +1,12 @@
 from django.shortcuts import render
 from django.http import FileResponse
+from .models import HangmanGames
 from .projects.pdf_merger import PDFMerger
 from .projects.password_generator import PasswordGenerator
 from .projects.hangman import Hangman
 from .projects.random_letter import RandomLetter
 from .projects.random_hangman_word import RandomHangmanWord
-import os
+import os, datetime
 
 # Create your views here.
 
@@ -106,21 +107,27 @@ def hangman_template(request):
     '''
     if request.method == "POST":
         level = request.POST.get('level')
-        return render(request, "website/hangman_game.html", {"level": level})
+        letter = RandomLetter().generateRandomLetter()
+        hangman_word = RandomHangmanWord(level.upper()).generateRandomWord(letter)
+
+        if level == "Easy":
+            number_of_guesses = len(hangman_word) + 7
+        elif level == "Medium":
+            number_of_guesses = len(hangman_word) + 5
+        else:
+            number_of_guesses = len(hangman_word) + 3
+
+        hangman_db = HangmanGames(
+            level=level.upper(),
+            word=hangman_word,
+            number_of_guesses=number_of_guesses,
+            number_of_guesses_taken=0,
+            date_played=str(datetime.datetime.now())
+        )
+        hangman_db.save()
+        return render(request, "website/hangman.html", {"level": level})
 
     return render(request, "website/hangman.html")
-
-def hangman_game(request):
-    # TODO: Finish implementation
-    '''
-    Returns a page with a demo of the hangman game.
-    '''
-    if level == None:
-        render(request, "website/hangman.html")
-
-    if request.method == "POST":
-        level = request.POST.get('level').upper()
-        render(request, "website/hangman_game.html")
 
 def contact(request):
     '''
