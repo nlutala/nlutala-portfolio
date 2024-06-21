@@ -3,13 +3,19 @@ from django.db import models
 # Create your models here.
 
 class HangmanGames(models.Model):
-    RESULT = {
-        "W": "Won",
-        "L": "Lost"
-    }
+    '''
+    Class to store the most important things
+    about the Hangman game that a user will play.
+    '''
     level = models.CharField(max_length=6)
     word = models.CharField(max_length=45)
-    number_of_guesses = models.IntegerField()
-    number_of_guesses_taken = models.IntegerField()
-    date_played = models.CharField()
-    result = models.CharField(choices=RESULT)
+
+class HangmanGuesses(models.Model):
+    '''
+    Class to store all the guesses a user makes
+    when playing the game.
+    '''
+    # foreign_key is usually the id of the HangmanGames
+    # object of the word that the user is trying to guess
+    foreign_key = models.IntegerField(null=False)
+    guess = models.CharField(max_length=45)

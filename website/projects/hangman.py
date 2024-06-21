@@ -14,7 +14,7 @@ class Hangman:
         '''
         Returns the list of letters that the user guessed incorrectly
         '''
-        return " ".join(list(self.incorrect_letters))
+        return list(self.incorrect_letters)
     
     def _getIndexesOfALetterInAWord(self, word: str, letter: str) -> list:
         '''

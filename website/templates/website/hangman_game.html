@@ -57,8 +57,20 @@
         </div>
       </form>
     </div>
+    {% if previous_guesses %}
+    <div class="container-fluid">
+      <p style="text-align: center;">Your previous guesses:</p>
+      <div class="row justify-content-md-center">
+        {% for guess in previous_guesses %}
+          <div class="col-md-auto">
+            {{ guess }}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
     <div class="container-fluid" style="text-align: center;">
-      <p>
+      <p style="padding-top: 10px;">
         <i>Want to install a version that works on your own computer? Check out the source code on <a href="https://github.com/nlutala/Hangman" target="_blank" style="color: #212529;">GitHub</a></i>
       </p>
     </div>
