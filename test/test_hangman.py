@@ -172,7 +172,7 @@ class TestHangman(unittest.TestCase):
         hangman.revealCorrectLetters(word, 'y')
         hangman.revealCorrectLetters(word, 'y')
 
-        incorrect_guesses = hangman.getIncorrectGuesses().split(" ")
+        incorrect_guesses = hangman.getIncorrectGuesses()
 
         for letter in incorrect_guesses:
             assert incorrect_guesses.count(letter) == 1
