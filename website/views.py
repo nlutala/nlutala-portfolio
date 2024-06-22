@@ -107,11 +107,14 @@ def hangman_template(request):
     '''
     # Initialise the level
     level = ""
+
     # Initialise the hangman guesser
     hangman = Hangman()
+
     # Initialise hidden word
     words = HangmanGames.objects.values_list("word", flat=True)
 
+    # Take the most recent word added to the database/model for the user to guess
     if len(words) != 0:
         hangman_word = words[len(words)-1]
         hidden_word = "_ " * len(hangman_word)
@@ -139,9 +142,8 @@ def hangman_template(request):
 
             hidden_word = "_ " * len(hangman_word)
 
-            # print(HangmanGames.objects.values_list("word", flat=True))
-            # Below deletes everything from the table
             HangmanGames.objects.all().delete()
+
             hangman_db = HangmanGames.objects.create(
                 level=level.upper(),
                 word=hangman_word,
@@ -158,10 +160,12 @@ def hangman_template(request):
         else:
             level = HangmanGames.objects.get(word=hangman_word).level.capitalize()
             user_guess = request.POST.get('letterWordGuess')
+
             HangmanGuesses.objects.create(
                 foreign_key=HangmanGames.objects.get(word=hangman_word).id,
                 guess=user_guess
             )
+
             foreign_key = HangmanGames.objects.get(word=hangman_word).id
             guesses = HangmanGuesses.objects.filter(
                 foreign_key=foreign_key
@@ -175,14 +179,14 @@ def hangman_template(request):
             previous_guesses = hangman.getIncorrectGuesses()
 
             guesses_taken = HangmanGames.objects.get(word=hangman_word).guesses_taken + 1
+            
             HangmanGames.objects.filter(
                 word=hangman_word, id=foreign_key
                 ).update(
                     guesses_taken=guesses_taken
                 )
+            
             guesses_allowed = HangmanGames.objects.get(word=hangman_word).guesses_allowed
-
-            # print("Guesses taken:", guesses_taken, "\nGuesses allowed:", guesses_allowed)
             number_of_guesses_remaining = guesses_allowed - guesses_taken
 
             if hidden_word == hangman_word:
