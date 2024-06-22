@@ -9,6 +9,8 @@ class HangmanGames(models.Model):
     '''
     level = models.CharField(max_length=6)
     word = models.CharField(max_length=45)
+    guesses_allowed = models.IntegerField(default=0)
+    guesses_taken = models.IntegerField(default=0)
 
 class HangmanGuesses(models.Model):
     '''

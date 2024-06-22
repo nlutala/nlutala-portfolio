@@ -38,6 +38,14 @@
         </ol>
       </nav>
     </div>
+    {% if alert_message %}
+      <div class="container-fluid">
+        <div class="alert alert-primary" role="alert">
+          {{ alert_message }} <br>
+          Refresh the page to play again or check out some other projects.
+        </div>
+      </div>
+    {% endif %}
     <div class="container-fluid">
       <h1>Hangman: {{ level }}</h1>
       <p>Guess the hidden word below</p>
@@ -49,17 +57,25 @@
         <div class="mb-3">
           <label for="letterWordGuess" class="form-label">Enter a letter you think is in the word (or the whole word if you think you know it)</label>
           <div class="input-group">
-            <input type="text" class="form-control" id="letterWordGuess" name="letterWordGuess" aria-describedby="guess-with-a-letter-or-word" required />
+            {% if alert_message %}
+              <input type="text" class="form-control" id="letterWordGuess" name="letterWordGuess" aria-describedby="guess-with-a-letter-or-word" disabled />
+            {% else %}
+              <input type="text" class="form-control" id="letterWordGuess" name="letterWordGuess" aria-describedby="guess-with-a-letter-or-word" required />
+            {% endif %}
           </div>
         </div>
         <div style="padding: 15px; text-align: center;">
-          <input type="submit" value="Submit" class="btn btn-primary btn-lg" />
+          {% if alert_message %}
+            <input type="submit" value="Submit" class="btn btn-primary btn-lg" disabled />
+          {% else %}
+            <input type="submit" value="Submit" class="btn btn-primary btn-lg" />
+          {% endif %}
         </div>
       </form>
     </div>
     {% if previous_guesses %}
     <div class="container-fluid">
-      <p style="text-align: center;">Your previous guesses:</p>
+      <p style="text-align: center;">Your previous incorrect guesses:</p>
       <div class="row justify-content-md-center">
         {% for guess in previous_guesses %}
           <div class="col-md-auto">

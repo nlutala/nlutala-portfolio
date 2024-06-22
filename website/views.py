@@ -122,8 +122,8 @@ def hangman_template(request):
     # Initialise previous guesses
     previous_guesses = hangman.getIncorrectGuesses()
 
-    # alert user won or lost?
-    alert = False
+    # alert user won or lost
+    alert_message = ""
 
     if request.method == "POST":
         level = request.POST.get('level')
@@ -146,7 +146,9 @@ def hangman_template(request):
             HangmanGames.objects.all().delete()
             hangman_db = HangmanGames.objects.create(
                 level=level.upper(),
-                word=hangman_word
+                word=hangman_word,
+                guesses_allowed=number_of_guesses,
+                guesses_taken=0
             )
             hangman_db.save()
 
@@ -155,7 +157,6 @@ def hangman_template(request):
                 "number_of_guesses": number_of_guesses, 
                 "previous_guesses": previous_guesses
             })
-
         else:
             level = HangmanGames.objects.get(word=hangman_word).level.capitalize()
             user_guess = request.POST.get('letterWordGuess')
@@ -175,14 +176,32 @@ def hangman_template(request):
             
             previous_guesses = hangman.getIncorrectGuesses()
 
+            guesses_taken = HangmanGames.objects.get(word=hangman_word).guesses_taken + 1
+            HangmanGames.objects.filter(
+                word=hangman_word, id=foreign_key
+                ).update(
+                    guesses_taken=guesses_taken
+                )
+            guesses_allowed = HangmanGames.objects.get(word=hangman_word).guesses_allowed
+
+            print("Guesses taken:", guesses_taken, "\nGuesses allowed:", guesses_allowed)
+
             if hidden_word == hangman_word:
-                alert = True
+                alert_message = f'''
+                Congratulations!
+                You have guessed the word in {guesses_taken} guess(es)!
+                '''
+            elif guesses_taken == guesses_allowed:
+                alert_message = f'''
+                    Unlucky!
+                    The word was: {hangman_word}
+                    '''
 
             return render(request, "website/hangman_game.html", {
                 "level": level, "hidden_word": " ".join(list(hidden_word)),
                 "number_of_guesses": number_of_guesses, 
                 "previous_guesses": previous_guesses,
-                "alert": alert
+                "alert_message": alert_message
             })
 
     return render(request, "website/hangman.html")
