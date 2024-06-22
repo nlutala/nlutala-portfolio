@@ -60,7 +60,6 @@ def password_generator(request):
     Returns a page with a demo of the password generator to try out.
     '''
     pg = PasswordGenerator(8)
-    display_warning = False
     warning_text = ""
 
     if request.method == "POST":
@@ -76,24 +75,17 @@ def password_generator(request):
                 num_symbols=num_symbols, num_uppercase=num_uppercase
                 )
         except ValueError as text:
-            display_warning = True
             warning_text = text
-            passwords = []
+            passwords = pg.generate_password(
+                num_numbers=2, num_symbols=2, num_uppercase=2
+            )
     else:
         passwords = pg.generate_password(
             num_numbers=2, num_symbols=2, num_uppercase=2
             )
 
-    if display_warning == True:
-        return render(request, "website/password_generator.html", {
-            "passwords": passwords, 
-            "display_warning": display_warning, 
-            "warning_text": warning_text
-            })
-
     return render(request, "website/password_generator.html", {
         "passwords": passwords, 
-        "display_warning": display_warning, 
         "warning_text": warning_text
         })
 
