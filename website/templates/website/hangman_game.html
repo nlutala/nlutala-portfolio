@@ -42,7 +42,7 @@
       <div class="container-fluid">
         <div class="alert alert-primary" role="alert">
           {{ alert_message }} <br>
-          Refresh the page to play again or check out some other projects.
+          Refresh the page to play again, or navigate to the projects page to check out some other projects.
         </div>
       </div>
     {% endif %}
@@ -50,6 +50,9 @@
       <h1>Hangman: {{ level }}</h1>
       <p>Guess the hidden word below</p>
       <p>{{ hidden_word }}</p>
+    </div>
+    <div class="container-fluid" style="padding-bottom: 15px;">
+      Number of guesses remaining: {{ number_of_guesses }}
     </div>
     <div class="container-fluid">
       <form method="post">

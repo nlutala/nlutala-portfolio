@@ -117,8 +117,6 @@ def hangman_template(request):
         hidden_word = "_ " * len(hangman_word)
         hidden_word = hidden_word[:len(hidden_word)-1]
 
-    # Initialise number of guesses
-    number_of_guesses = 0
     # Initialise previous guesses
     previous_guesses = hangman.getIncorrectGuesses()
 
@@ -184,7 +182,8 @@ def hangman_template(request):
                 )
             guesses_allowed = HangmanGames.objects.get(word=hangman_word).guesses_allowed
 
-            print("Guesses taken:", guesses_taken, "\nGuesses allowed:", guesses_allowed)
+            # print("Guesses taken:", guesses_taken, "\nGuesses allowed:", guesses_allowed)
+            number_of_guesses_remaining = guesses_allowed - guesses_taken
 
             if hidden_word == hangman_word:
                 alert_message = f'''
@@ -199,7 +198,7 @@ def hangman_template(request):
 
             return render(request, "website/hangman_game.html", {
                 "level": level, "hidden_word": " ".join(list(hidden_word)),
-                "number_of_guesses": number_of_guesses, 
+                "number_of_guesses": number_of_guesses_remaining, 
                 "previous_guesses": previous_guesses,
                 "alert_message": alert_message
             })
