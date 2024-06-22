@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from django.http import FileResponse
+from .models import HangmanGames, HangmanGuesses
 from .projects.pdf_merger import PDFMerger
 from .projects.password_generator import PasswordGenerator
-import os
+from .projects.hangman import Hangman
+from .projects.random_letter import RandomLetter
+from .projects.random_hangman_word import RandomHangmanWord
+import os, datetime
 
 # Create your views here.
 
@@ -69,7 +73,6 @@ def password_generator(request):
         num_symbols = int(request.POST.get('numSymbols'))
         num_uppercase = int(request.POST.get('numUppercase'))
 
-        # Wrap this in a try-except and make an alert for the validation
         try:
             passwords = pg.generate_password(
                 length=length, num_numbers=num_numbers, 
@@ -96,6 +99,115 @@ def password_generator(request):
         "display_warning": display_warning, 
         "warning_text": warning_text
         })
+
+def hangman_template(request):
+    '''
+    Returns a page with instructions and allows the user to
+    select a level to play the hangman game.
+    '''
+    # Initialise the level
+    level = ""
+
+    # Initialise the hangman guesser
+    hangman = Hangman()
+
+    # Initialise hidden word
+    words = HangmanGames.objects.values_list("word", flat=True)
+
+    # Take the most recent word added to the database/model for the user to guess
+    if len(words) != 0:
+        hangman_word = words[len(words)-1]
+        hidden_word = "_ " * len(hangman_word)
+        hidden_word = hidden_word[:len(hidden_word)-1]
+
+    # Initialise previous guesses
+    previous_guesses = hangman.getIncorrectGuesses()
+
+    # alert user won or lost
+    alert_message = ""
+
+    if request.method == "POST":
+        level = request.POST.get('level')
+
+        if level != None:
+            letter = RandomLetter().generateRandomLetter()
+            hangman_word = RandomHangmanWord(level.upper()).generateRandomWord(letter)
+
+            if level == "Easy":
+                number_of_guesses = len(hangman_word) + 7
+            elif level == "Medium":
+                number_of_guesses = len(hangman_word) + 5
+            else:
+                number_of_guesses = len(hangman_word) + 3
+
+            hidden_word = "_ " * len(hangman_word)
+
+            HangmanGames.objects.all().delete()
+
+            hangman_db = HangmanGames.objects.create(
+                level=level.upper(),
+                word=hangman_word,
+                guesses_allowed=number_of_guesses,
+                guesses_taken=0
+            )
+            hangman_db.save()
+
+            return render(request, "website/hangman_game.html", {
+                "level": level, "hidden_word": hidden_word,
+                "number_of_guesses": number_of_guesses, 
+                "previous_guesses": previous_guesses
+            })
+        else:
+            level = HangmanGames.objects.get(word=hangman_word).level.capitalize()
+            user_guess = request.POST.get('letterWordGuess')
+
+            HangmanGuesses.objects.create(
+                foreign_key=HangmanGames.objects.get(word=hangman_word).id,
+                guess=user_guess
+            )
+
+            foreign_key = HangmanGames.objects.get(word=hangman_word).id
+            guesses = HangmanGuesses.objects.filter(
+                foreign_key=foreign_key
+                ).values_list(
+                    "guess", flat=True
+                )
+
+            for guess in guesses:
+                hidden_word = hangman.revealCorrectLetters(hangman_word, guess)
+            
+            previous_guesses = hangman.getIncorrectGuesses()
+
+            guesses_taken = HangmanGames.objects.get(word=hangman_word).guesses_taken + 1
+            
+            HangmanGames.objects.filter(
+                word=hangman_word, id=foreign_key
+                ).update(
+                    guesses_taken=guesses_taken
+                )
+            
+            guesses_allowed = HangmanGames.objects.get(word=hangman_word).guesses_allowed
+            number_of_guesses_remaining = guesses_allowed - guesses_taken
+
+            if hidden_word == hangman_word:
+                alert_message = f'''
+                Congratulations!
+                You have guessed the word in {guesses_taken} guess(es)!
+                '''
+            elif guesses_taken == guesses_allowed:
+                alert_message = f'''
+                    Unlucky!
+                    The word was: {hangman_word}
+                    '''
+
+            return render(request, "website/hangman_game.html", {
+                "level": level, "hidden_word": " ".join(list(hidden_word)),
+                "number_of_guesses": number_of_guesses_remaining, 
+                "previous_guesses": previous_guesses,
+                "alert_message": alert_message
+            })
+
+    return render(request, "website/hangman.html")
 
 def contact(request):
     '''
