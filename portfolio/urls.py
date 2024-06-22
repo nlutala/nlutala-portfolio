@@ -30,5 +30,7 @@ urlpatterns = [
     path("projects/pdf-merger/", include("website.urls")),
     path("projects/password-generator", include("website.urls")),
     path("projects/password-generator/", include("website.urls")),
+    path("projects/hangman", include("website.urls")),
+    path("projects/hangman/", include("website.urls")),
     # path("admin/", admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

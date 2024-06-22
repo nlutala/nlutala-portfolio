@@ -77,6 +77,68 @@ class TestViews(TestCase):
         assert self.assertTemplateUsed(template_name="password_generator.html")
         assert response['content-type'] == "text/html; charset=utf-8"
 
+    '''
+    Tests for the Hangman page
+    '''
+    def test_hangman_is_accessible_without_forward_slash(self):
+        client = Client()
+        response = client.get("/projects/hangman")
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="hangman.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
+    def test_hangman_is_accessible_with_forward_slash(self):
+        client = Client()
+        response = client.get("/projects/hangman/")
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="hangman.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
+    def test_hangman_game_is_played_when_user_submits_easy(self):
+        client = Client()
+        response = client.post("/projects/hangman/", {"level": "Easy"})
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="hangman_game.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
+    def test_hangman_game_is_played_when_user_submits_medium(self):
+        client = Client()
+        response = client.post("/projects/hangman/", {"level": "Medium"})
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="hangman_game.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
+    def test_hangman_game_is_played_when_user_submits_hard(self):
+        client = Client()
+        response = client.post("/projects/hangman/", {"level": "Hard"})
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="hangman_game.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
+    def test_hangman_game_quits_when_user_refreshes_page_when_easy(self):
+        client = Client()
+        response = client.post("/projects/hangman/", {"level": "Easy"})
+        assert self.assertTemplateUsed(template_name="hangman_game.html")
+
+        response = client.get("/projects/hangman/")
+        assert self.assertTemplateUsed(template_name="hangman.html")
+
+    def test_hangman_game_quits_when_user_refreshes_page_when_medium(self):
+        client = Client()
+        response = client.post("/projects/hangman/", {"level": "Medium"})
+        assert self.assertTemplateUsed(template_name="hangman_game.html")
+        
+        response = client.get("/projects/hangman/")
+        assert self.assertTemplateUsed(template_name="hangman.html")
+
+    def test_hangman_game_quits_when_user_refreshes_page_when_hard(self):
+        client = Client()
+        response = client.post("/projects/hangman/", {"level": "Hard"})
+        assert self.assertTemplateUsed(template_name="hangman_game.html")
+        
+        response = client.get("/projects/hangman/")
+        assert self.assertTemplateUsed(template_name="hangman.html")
+
     # ============== Tests for the contact view ====================
     def test_contact_is_accessible(self):
         client = Client()
