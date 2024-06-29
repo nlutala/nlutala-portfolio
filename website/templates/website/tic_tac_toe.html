@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>nlutala | Projects - Hangman</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+  </head>
+
+  <body style="padding: 15px 15px;">
+    <nav class="navbar" style="border-radius: 1%;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/" style="color: #212529;">Nathan Lutala</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/contact">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a href="/projects" style="color: #212529;">Projects</a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Tic-tac-toe</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="container-fluid">
+      <h1>Hangman</h1>
+      <p>The purpose of this project is to create a simple hangman game based on my interpretation. Try it out below.</p>
+    </div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-4">
+          <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+            <nav class="nav nav-pills flex-column">
+              <a class="nav-link" href="#item-1">Instructions</a>
+              <a class="nav-link" href="#item-2">Play Game</a>
+            </nav>
+          </nav>
+        </div>
+      
+        <div class="col-8">
+          <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+            <div id="item-1">
+              <h4>Instructions</h4>
+              <p>
+                The aim of the game is get three Os in a row either horizontally,
+                vertically or diagonally before the CPU.
+              </p>
+              <p>
+                Scrolling to the 'Play Game' section to play.
+              </p>
+            </div>
+            <div id="item-2">
+              <h4>Play Game</h4>
+              <form method="post">
+                {% csrf_token %}
+                <select id="level" name="level" class="form-select" aria-label="Select Hangman level">
+                  <option value="naive_cpu">Naive CPU</option>
+                  <option value="ml_cpu">Machine Learning CPU</option>
+                </select>
+                <div style="padding: 15px; text-align: center;">
+                  <a href="#"><input type="submit" value="Play!" class="btn btn-primary btn-lg" /></a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid" style="text-align: center;">
+      <p>
+        <i>
+          Want to install a version that works on your own computer?
+          Check out the Java source code on GitHub
+          <a href="https://github.com/nlutala/tic-tac-toe" 
+            target="_blank" style="color: #212529;">here</a>
+          or the Python source code on GitHub
+          <a href="https://github.com/nlutala/tic-tac-toe" 
+            target="_blank" style="color: #212529;">here</a>.
+        </i>
+      </p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+  </body>
+</html>
