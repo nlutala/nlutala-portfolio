@@ -17,4 +17,6 @@ urlpatterns = [
     path("projects/password-generator/", views.password_generator, name="password-generator"),
     path("projects/hangman", views.hangman_template, name="hangman_template"),
     path("projects/hangman/", views.hangman_template, name="hangman_template"),
+    path("projects/tic-tac-toe", views.tic_tac_toe, name="tic_tac_toe"),
+    path("projects/tic-tac-toe/", views.tic_tac_toe, name="tic_tac_toe"),
 ]

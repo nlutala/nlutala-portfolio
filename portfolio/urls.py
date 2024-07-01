@@ -32,5 +32,7 @@ urlpatterns = [
     path("projects/password-generator/", include("website.urls")),
     path("projects/hangman", include("website.urls")),
     path("projects/hangman/", include("website.urls")),
+    path("projects/tic-tac-toe", include("website.urls")),
+    path("projects/tic-tac-toe/", include("website.urls")),
     # path("admin/", admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

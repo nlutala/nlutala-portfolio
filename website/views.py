@@ -201,6 +201,12 @@ def hangman_template(request):
 
     return render(request, "website/hangman.html")
 
+def tic_tac_toe(request):
+    '''
+    Returns a page with a demo of the toc-tac-toe game to try out.
+    '''
+    return render(request, "website/tic_tac_toe.html")
+
 def contact(request):
     '''
     Returns a page with where to contact/follow me (Github & LinkedIn).
