@@ -78,28 +78,20 @@
       <!-- Should change depending on who's turn it is -->
       <p>It's your turn (O)</p>
       <div class="container-fluid">
-        <table>
+        <table class="table table-bordered" style="border: black;">
           <!-- 
             Each tr would signify a list of the game state, and the id
             should be from 0-8.
 
             This should be wrapped in a for loop
             -->
-          <tr>
-            <td>X</td>
-            <td>O</td>
-            <td>X</td>
-          </tr>
-          <tr>
-            <td>O</td>
-            <td>O</td>
-            <td>X</td>
-          </tr>
-          <tr>
-            <td>O</td>
-            <td></td>
-            <td>X</td>
-          </tr>
+          {% for row in grid_rows %}
+            <tr>
+              {% for r in row%}
+                <td>{{ r }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
         </table>
       </div>
     </div>

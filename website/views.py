@@ -6,6 +6,8 @@ from .projects.password_generator import PasswordGenerator
 from .projects.hangman import Hangman
 from .projects.random_letter import RandomLetter
 from .projects.random_hangman_word import RandomHangmanWord
+from .projects.gamestate_ttt import GameState
+from. projects.ml_cpu_ttt import MLCPU
 import os, datetime
 
 # Create your views here.
@@ -205,7 +207,14 @@ def tic_tac_toe(request):
     '''
     Returns a page with a demo of the toc-tac-toe game to try out.
     '''
-    return render(request, "website/tic_tac_toe.html")
+    game_state = GameState()
+    grid = game_state.get_game_state()
+    grid_rows = []
+
+    for i in range(0, len(grid), 3):
+        grid_rows.append(grid[i:i+3])
+
+    return render(request, "website/tic_tac_toe.html", {"grid_rows": grid_rows})
 
 def contact(request):
     '''
