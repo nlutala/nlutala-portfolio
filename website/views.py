@@ -207,14 +207,27 @@ def tic_tac_toe(request):
     '''
     Returns a page with a demo of the toc-tac-toe game to try out.
     '''
-    game_state = GameState()
-    grid = game_state.get_game_state()
+    gs = GameState()
+    grid = gs.get_game_state()
+
+    info_grid = []
+
+    for i in range(len(gs.get_game_state())):
+        if gs.get_game_state()[i] == "_":
+            info_grid.append(i)
+
+    info_grid_rows = []
     grid_rows = []
 
     for i in range(0, len(grid), 3):
         grid_rows.append(grid[i:i+3])
+        info_grid_rows.append(info_grid[i:i+3])
 
-    return render(request, "website/tic_tac_toe.html", {"grid_rows": grid_rows})
+    return render(request, "website/tic_tac_toe.html", {
+        "grid_rows": grid_rows, "info_grid": info_grid,
+        "info_grid_rows": info_grid_rows,
+        }
+    )
 
 def contact(request):
     '''

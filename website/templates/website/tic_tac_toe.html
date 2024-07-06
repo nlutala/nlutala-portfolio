@@ -95,6 +95,38 @@
         </table>
       </div>
     </div>
+    <div class="container text-center">
+      <div class="row">
+        <div class="col">
+          <p style="font-size: 9pt;">
+            Select the position you would like to place your "O".
+            Look at the grid on the right of this form to understand
+            which number correlates to which position.
+          </p>
+          <form class="was-validated" method="post">
+            {% csrf_token %}
+            <select id="level" name="level" class="form-select" aria-label="Select Hangman level">
+              {% for position in info_grid %}
+                <option value="{{ position }}">{{ position }}</option>
+              {% endfor %}
+            </select>
+            <div style="padding: 15px; text-align: center;">
+              <a href="/tic_tac_toe"><input type="submit" value="Play!" class="btn btn-primary btn-lg" /></a>
+            </div>
+          </form>
+        </div>
+        <div class="col">
+          <table class="table table-bordered" style="border: black;">
+            {% for row in info_grid_rows %}
+              <tr>
+                {% for r in row%}
+                  <td>{{ r }}</td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </table>
+        </div>        
+      </div>
     <div class="container-fluid" style="text-align: center;">
       <p>
         <i>
