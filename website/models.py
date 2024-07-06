@@ -21,3 +21,12 @@ class HangmanGuesses(models.Model):
     # object of the word that the user is trying to guess
     foreign_key = models.IntegerField(null=False)
     guess = models.CharField(max_length=45)
+
+class TTTMoves(model.Model):
+    '''
+    TODO: Create a model that stores:
+    The game state in the form of a string XXOOXOX
+    The outcome (W, D or L) for win, draw or lose respectively
+    It needs a game id, but I think that's already a given
+    '''
+    pass
