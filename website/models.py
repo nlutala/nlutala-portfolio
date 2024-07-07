@@ -22,7 +22,7 @@ class HangmanGuesses(models.Model):
     foreign_key = models.IntegerField(null=False)
     guess = models.CharField(max_length=45)
 
-class TTTMoves(model.Model):
+class TTTMoves(models.Model):
     '''
     TODO: Create a model that stores:
     The game state in the form of a string XXOOXOX
