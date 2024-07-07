@@ -240,27 +240,26 @@ def tic_tac_toe(request):
                 game_over_message = "Great job! You won!"
             else:
                 game_over_message == "It is a draw this time. Why not play again?"
+        else:
+            # Just to make the effect that the CPU is "thinking" before making a move
+            time.sleep(3)
+            cpu_position = cpu.make_move(list(state), gs.get_available_positions())
+            gs.set_game_state(cpu_position, cpu.get_symbol())
 
-        # Just to make the effect that the CPU is "thinking" before making a move
-        time.sleep(3)
-        cpu_position = cpu.make_move(list(state), gs.get_available_positions())
-        gs.set_game_state(cpu_position, cpu.get_symbol())
-
-        # Check whether the game is done... again
-        if gs.is_done():
-            if gs.outcome == "W":
-                game_over_message = "Unlucky! The CPU won this time."
-            elif gs.outcome == "L":
-                game_over_message = "Great job! You won!"
-            else:
-                game_over_message == "It is a draw this time. Why not play again?"
+            # Check whether the game is done... again
+            if gs.is_done():
+                if gs.outcome == "W":
+                    game_over_message = "Unlucky! The CPU won this time."
+                elif gs.outcome == "L":
+                    game_over_message = "Great job! You won!"
+                else:
+                    game_over_message == "It is a draw this time. Why not play again?"
 
         TTTMoves.objects.filter(
             game_state=state, id=game_state_id
         ).update(
             game_state="".join(gs.get_game_state())
         )
-
     else:
         TTTMoves.objects.all().delete()
         # Create new entry in TTTMoves
