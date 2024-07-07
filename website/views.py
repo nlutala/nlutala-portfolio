@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import FileResponse
-from .models import HangmanGames, HangmanGuesses
+from .models import HangmanGames, HangmanGuesses, TTTMoves
 from .projects.pdf_merger import PDFMerger
 from .projects.password_generator import PasswordGenerator
 from .projects.hangman import Hangman
@@ -8,7 +8,7 @@ from .projects.random_letter import RandomLetter
 from .projects.random_hangman_word import RandomHangmanWord
 from .projects.gamestate_ttt import GameState
 from. projects.ml_cpu_ttt import MLCPU
-import os, datetime
+import os, time
 
 # Create your views here.
 
@@ -207,8 +207,8 @@ def tic_tac_toe(request):
     '''
     Returns a page with a demo of the toc-tac-toe game to try out.
     '''
+    cpu = MLCPU()
     gs = GameState()
-    grid = gs.get_game_state()
 
     info_grid = []
 
@@ -217,15 +217,73 @@ def tic_tac_toe(request):
             info_grid.append(i)
 
     info_grid_rows = []
+
+    game_over_message = ""
+
+    if request.method == "POST":
+        user_position = int(request.POST.get('position'))
+        game_state = TTTMoves.objects.values_list("game_state", flat=True)
+        state = game_state[len(game_state)-1]
+        game_state_id = TTTMoves.objects.get(game_state=state).id
+
+        for i in range(len(list(state))):
+            if list(state)[i] != "_":
+                gs.set_game_state(i, list(state)[i])
+
+        gs.set_game_state(user_position, "O")
+
+        # Check whether the game is done
+        if gs.is_done():
+            if gs.outcome == "W":
+                game_over_message = "Unlucky! The CPU won this time."
+            elif gs.outcome == "L":
+                game_over_message = "Great job! You won!"
+            else:
+                game_over_message == "It is a draw this time. Why not play again?"
+
+        # Just to make the effect that the CPU is "thinking" before making a move
+        time.sleep(3)
+        cpu_position = cpu.make_move(list(state), gs.get_available_positions())
+        gs.set_game_state(cpu_position, cpu.get_symbol())
+
+        # Check whether the game is done... again
+        if gs.is_done():
+            if gs.outcome == "W":
+                game_over_message = "Unlucky! The CPU won this time."
+            elif gs.outcome == "L":
+                game_over_message = "Great job! You won!"
+            else:
+                game_over_message == "It is a draw this time. Why not play again?"
+
+        TTTMoves.objects.filter(
+            game_state=state, id=game_state_id
+        ).update(
+            game_state="".join(gs.get_game_state())
+        )
+
+    else:
+        TTTMoves.objects.all().delete()
+        # Create new entry in TTTMoves
+        ttt_db = TTTMoves.objects.create(
+            game_state = "".join(gs.get_game_state()),
+            outcome = ""
+        )
+        ttt_db.save()
+
+    grid = gs.get_game_state()
     grid_rows = []
 
     for i in range(0, len(grid), 3):
         grid_rows.append(grid[i:i+3])
         info_grid_rows.append(info_grid[i:i+3])
 
+    available_spaces = gs.get_available_positions()
+
     return render(request, "website/tic_tac_toe.html", {
         "grid_rows": grid_rows, "info_grid": info_grid,
         "info_grid_rows": info_grid_rows,
+        "game_over_message": game_over_message,
+        "available_spaces": available_spaces
         }
     )
 

@@ -71,12 +71,15 @@
         The aim of the game is get three Os in a row either horizontally,
         vertically or diagonally before the CPU.
       </p>
-      <p>
-        Click on a place on the grid to start playing below.
-      </p>
       <h2>Play Game</h2>
-      <!-- Should change depending on who's turn it is -->
-      <p>It's your turn (O)</p>
+      {% if game_over_message %}
+        <div class="alert alert-primary" role="alert">
+          {{ game_over_message }} <br>
+          Refresh the page to play again, or navigate to the projects page to check out some other projects.
+        </div>
+      {% else %}
+        <p>It's your turn! You are noughts (O)</p>
+      {% endif %}
       <div class="container-fluid">
         <table class="table table-bordered" style="border: black;">
           <!-- 
@@ -105,13 +108,21 @@
           </p>
           <form class="was-validated" method="post">
             {% csrf_token %}
-            <select id="level" name="level" class="form-select" aria-label="Select Hangman level">
-              {% for position in info_grid %}
-                <option value="{{ position }}">{{ position }}</option>
-              {% endfor %}
+            <select id="position" name="position" class="form-select" aria-label="Select Position on Tic-tac-toe grid">
+              {% if available_spaces%}
+                {% for position in available_spaces %}
+                  <option value="{{ position }}">{{ position }}</option>
+                {% endfor %}
+              {% else %}
+                <option value="game-over">Game Over</option>
+              {% endif%}
             </select>
             <div style="padding: 15px; text-align: center;">
-              <a href="/tic_tac_toe"><input type="submit" value="Play!" class="btn btn-primary btn-lg" /></a>
+              {% if game_over_message %}
+                <a href="/tic_tac_toe"><input type="submit" value="Play!" class="btn btn-primary btn-lg" disabled/></a>
+              {% else %}
+                <a href="/tic_tac_toe"><input type="submit" value="Play!" class="btn btn-primary btn-lg" /></a>
+              {% endif %}
             </div>
           </form>
         </div>

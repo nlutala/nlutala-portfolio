@@ -29,4 +29,5 @@ class TTTMoves(models.Model):
     The outcome (W, D or L) for win, draw or lose respectively
     It needs a game id, but I think that's already a given
     '''
-    pass
+    game_state = models.CharField(max_length=9)
+    outcome = models.CharField(max_length=1)
