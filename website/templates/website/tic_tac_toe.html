@@ -109,7 +109,7 @@
           <form class="was-validated" method="post">
             {% csrf_token %}
             <select id="position" name="position" class="form-select" aria-label="Select Position on Tic-tac-toe grid">
-              {% if available_spaces%}
+              {% if available_spaces %}
                 {% for position in available_spaces %}
                   <option value="{{ position }}">{{ position }}</option>
                 {% endfor %}
@@ -119,7 +119,7 @@
             </select>
             <div style="padding: 15px; text-align: center;">
               {% if game_over_message %}
-                <a href="/tic_tac_toe"><input type="submit" value="Play!" class="btn btn-primary btn-lg" disabled/></a>
+                <a href="#"><input type="submit" value="Play!" class="btn btn-primary btn-lg" disabled/></a>
               {% else %}
                 <a href="/tic_tac_toe"><input type="submit" value="Play!" class="btn btn-primary btn-lg" /></a>
               {% endif %}
