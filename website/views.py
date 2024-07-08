@@ -242,7 +242,7 @@ def tic_tac_toe(request):
                 game_over_message == "It is a draw this time. Why not play again?"
         else:
             # Just to make the effect that the CPU is "thinking" before making a move
-            time.sleep(3)
+            time.sleep(2)
             cpu_position = cpu.make_move(list(state), gs.get_available_positions())
             gs.set_game_state(cpu_position, cpu.get_symbol())
 
