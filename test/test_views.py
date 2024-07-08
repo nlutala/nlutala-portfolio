@@ -1,5 +1,5 @@
 from django.test import Client, TestCase
-import os
+import os, random
 
 class TestViews(TestCase):
     # ============== Tests for the index view ====================
@@ -138,6 +138,32 @@ class TestViews(TestCase):
         
         response = client.get("/projects/hangman/")
         assert self.assertTemplateUsed(template_name="hangman.html")
+
+    '''
+    Tests for the Tic-Tac-Toe page
+    '''
+    def test_ttt_is_accessible_without_forward_slash(self):
+        client = Client()
+        response = client.get("/projects/tic-tac-toe")
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="tic_tac_toe.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
+    def test_ttt_is_accessible_with_forward_slash(self):
+        client = Client()
+        response = client.get("/projects/tic-tac-toe/")
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="tic_tac_toe.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
+
+    def test_user_can_place_O_after_submitting_a_position(self):
+        client = Client()
+        position = str(random.randint(0,8))
+        response = client.get("/projects/tic-tac-toe/")
+        response = client.post("/projects/tic-tac-toe/", {"position": position})
+        assert response.status_code == 200
+        assert self.assertTemplateUsed(template_name="tic_tac_toe.html")
+        assert response['content-type'] == "text/html; charset=utf-8"
 
     # ============== Tests for the contact view ====================
     def test_contact_is_accessible(self):
