@@ -203,6 +203,22 @@ def hangman_template(request):
 
     return render(request, "website/hangman.html")
 
+def tic_tac_toe_helper(gs: GameState) -> str:
+    '''
+    Takes a GameState as a parameter and returns a message
+    if the tic-tac-toe game has ended.
+    '''
+    # Check whether the game is done... again
+    if gs.is_done():
+        if gs.outcome == "W":
+            return "Unlucky! The CPU won this time."
+        elif gs.outcome == "L":
+            return "Great job! You won!"
+        else:
+            return "It is a draw this time. Why not play again?"
+    else:
+        return ""
+
 def tic_tac_toe(request):
     '''
     Returns a page with a demo of the toc-tac-toe game to try out.
@@ -218,7 +234,7 @@ def tic_tac_toe(request):
 
     info_grid_rows = []
 
-    game_over_message = ""
+    game_over_message = tic_tac_toe_helper(gs)
 
     if request.method == "POST":
         user_position = int(request.POST.get('position'))
@@ -233,30 +249,19 @@ def tic_tac_toe(request):
         gs.set_game_state(user_position, "O")
 
         # Check whether the game is done
-        if gs.is_done():
-            if gs.outcome == "W":
-                game_over_message = "Unlucky! The CPU won this time."
-            elif gs.outcome == "L":
-                game_over_message = "Great job! You won!"
-            else:
-                game_over_message == "It is a draw this time. Why not play again?"
-        else:
+        game_over_message = tic_tac_toe_helper(gs)
+
+        if game_over_message == "":
             # Just to make the effect that the CPU is "thinking" before making a move
-            time.sleep(2)
-            cpu_position = cpu.make_move(list(state), gs.get_available_positions())
+            time.sleep(1)
+            cpu_position = cpu.make_move(list(gs.get_game_state()), gs.get_available_positions())
             gs.set_game_state(cpu_position, cpu.get_symbol())
 
             # Check whether the game is done... again
-            if gs.is_done():
-                if gs.outcome == "W":
-                    game_over_message = "Unlucky! The CPU won this time."
-                elif gs.outcome == "L":
-                    game_over_message = "Great job! You won!"
-                else:
-                    game_over_message == "It is a draw this time. Why not play again?"
+            game_over_message = tic_tac_toe_helper(gs)
 
         TTTMoves.objects.filter(
-            game_state=state, id=game_state_id
+            id=game_state_id
         ).update(
             game_state="".join(gs.get_game_state())
         )
