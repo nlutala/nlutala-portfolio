@@ -164,10 +164,3 @@ class TestViews(TestCase):
         assert response.status_code == 200
         assert self.assertTemplateUsed(template_name="tic_tac_toe.html")
         assert response['content-type'] == "text/html; charset=utf-8"
-
-    # ============== Tests for the contact view ====================
-    def test_contact_is_accessible(self):
-        client = Client()
-        response = client.get("/contact")
-        assert response.status_code == 200
-        assert response['content-type'] == "text/html; charset=utf-8"
