@@ -3,7 +3,10 @@ import os, random
 
 
 class TestViews(TestCase):
-    # ============== Tests for the index view ====================
+    """
+    Tests for the index view
+    """
+
     def test_index_is_accessible(self):
         client = Client()
         response = client.get("")
@@ -11,7 +14,10 @@ class TestViews(TestCase):
         assert self.assertTemplateUsed(template_name="index.html")
         assert response["content-type"] == "text/html; charset=utf-8"
 
-    # ============== Tests for the projects view ====================
+    """
+    Tests for the projects view
+    """
+    
     def test_projects_is_accessible(self):
         client = Client()
         response = client.get("/projects")
