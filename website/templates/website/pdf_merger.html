@@ -44,8 +44,15 @@
   </div>
   <div class="container-fluid">
     <h1>PDF Merger</h1>
-    <p>The purpose of this project is to combine multiple separate PDFs into one new PDF file. Try it out below.</p>
+    <p>The purpose of this projects is to combine multiple separate PDFs into one new PDF file. Try it out below.</p>
   </div>
+  {% if error_message %}
+  <div class="container-fluid">
+    <div class="alert alert-danger" role="alert">
+      {{ error_message }}
+    </div>
+  </div>
+  {% endif %}
   <div class="container-fluid">
     <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
