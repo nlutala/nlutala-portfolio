@@ -1,5 +1,5 @@
 from django.test import Client, TestCase
-import os, random
+import os, random, requests
 
 
 class TestViews(TestCase):
@@ -17,7 +17,7 @@ class TestViews(TestCase):
     """
     Tests for the projects view
     """
-    
+
     def test_projects_is_accessible(self):
         client = Client()
         response = client.get("/projects")
@@ -175,3 +175,30 @@ class TestViews(TestCase):
         assert response.status_code == 200
         assert self.assertTemplateUsed(template_name="tic_tac_toe.html")
         assert response["content-type"] == "text/html; charset=utf-8"
+
+    """
+    Test links that are on the index page are up and running.
+    """
+
+    def test_a_href_links_on_home_page_work(self):
+        # Test IEUK Certificate of completion link still works
+        response = requests.get(
+            "https://www.brightnetwork.co.uk/certificates/ieuk-2024-technology_gkx81xs17vqgr1/?trk=public_profile_see-credential"
+        )
+        assert response.status_code == 200
+
+        # Test Harmony website link still works
+        response = requests.get("https://harmonydata.ac.uk/")
+        assert response.status_code == 200
+
+        # Test Harmony Hackathon link to the README.md of the competition works
+        response = requests.get(
+            "https://github.com/harmonydata/hackathon/blob/main/README.md"
+        )
+        assert response.status_code == 200
+
+        # Test my group's submission to the repo is still accessible
+        response = requests.get(
+            "https://github.com/harmonydata/hackathon/blob/main/ux-design-for-better-comprehension.md"
+        )
+        assert response.status_code == 200
