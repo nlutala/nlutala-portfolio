@@ -62,6 +62,8 @@ MIDDLEWARE = [
     "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
 CSRF_TRUSTED_ORIGINS = [
     "https://nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net/",
     "http://www.nathanlutala.com",
