@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "website" ]
   pull_request:
-    branches: [ "wesbite" ]
+    branches: [ "website" ]
 
 jobs:
   build:
