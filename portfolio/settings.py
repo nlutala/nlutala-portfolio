@@ -58,6 +58,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.cache.UpdateCacheMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 
 ROOT_URLCONF = "portfolio.urls"
@@ -79,8 +81,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "portfolio.wsgi.application"
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_NAME = 'csrftoken'
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
