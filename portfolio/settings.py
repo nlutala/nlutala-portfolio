@@ -31,7 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net"]
+ALLOWED_HOSTS = ["nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net", "*"]
 # ALLOWED_HOSTS = ["blahblahblah.com"]
 
 
