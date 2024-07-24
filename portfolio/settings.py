@@ -60,6 +60,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 CSRF_COOKIE_SECURE = True
@@ -169,7 +170,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "website/templates/website", STATIC_URL),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 
 # Default primary key field type
