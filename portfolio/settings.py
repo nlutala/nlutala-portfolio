@@ -62,6 +62,11 @@ MIDDLEWARE = [
     "django.middleware.cache.FetchFromCacheMiddleware",
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net/",
+    "http://www.nathanlutala.com",
+]
+
 ROOT_URLCONF = "portfolio.urls"
 
 TEMPLATES = [
