@@ -31,8 +31,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net", "*"]
-# ALLOWED_HOSTS = ["blahblahblah.com"]
+ALLOWED_HOSTS = ["nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net", "nathanlutala.com" "*"]
 
 
 # Application definition
@@ -76,7 +75,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
-
+CSRF_COOKIE_SECURE = True
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
