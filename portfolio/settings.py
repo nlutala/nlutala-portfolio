@@ -169,6 +169,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "website/templates/website", STATIC_URL),
 ]
 
+STATIC_ROOT = os.path.join(BASE_DIR, STATIC_URL)
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
