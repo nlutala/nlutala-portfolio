@@ -27,5 +27,3 @@ urlpatterns = [
     path("projects/tic-tac-toe", views.tic_tac_toe, name="tic_tac_toe"),
     path("projects/tic-tac-toe/", views.tic_tac_toe, name="tic_tac_toe"),
 ]
-
-# handler404 = "views.error_404_view"
