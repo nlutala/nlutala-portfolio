@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     "nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net",
@@ -73,7 +73,7 @@ CSRF_COOKIE_DOMAIN = [
     "https://nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net/",
     "http://www.nathanlutala.com",
 ]
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ROOT_URLCONF = "portfolio.urls"
 
@@ -116,8 +116,8 @@ DATABASES = {
         "NAME": "mydb",
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": "",
-        "PORT": "",
+        "HOST": "localhost",
+        "PORT": "5432",
     }
 }
 
