@@ -95,7 +95,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "portfolio.wsgi.application"
 
-ASGI_APPLICATION = "portfolio.asgi.application"
 
 
 # Database
@@ -118,7 +117,7 @@ DATABASES = {
         "NAME": "mydb",
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": "127.0.0.1",
+        "HOST": "nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net",
         "PORT": "5432",
     }
 }
