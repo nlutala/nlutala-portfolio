@@ -116,10 +116,7 @@ DATABASES = {
         "NAME": "mydb",
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": [
-            "nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net",
-            "nathanlutala.com",
-        ],
+        "HOST": "",
         "PORT": "5432",
     }
 }
