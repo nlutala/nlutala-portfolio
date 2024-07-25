@@ -6,3 +6,6 @@ Please find the website at the links below:
 * http://nathanlutala.com (http version, I would recommend not trying the pdf-merger project on this version for security purposes... Only if there is not any sensitive information in the pdfs you are looking to merge).
 
 Feel free to reach out to me on LinkedIn (https://www.linkedin.com/in/nathanlutala/) if you would like to give me some feedback!
+
+## Notes
+One thing I noticed is that the projects won't work if you have disabled cookies when you are privately browsing on a browser of your choice.
