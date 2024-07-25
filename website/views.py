@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import FileResponse
-from django.views.decorators.csrf import csrf_protect, requires_csrf_token
+from django.views.decorators.csrf import csrf_protect, requires_csrf_token, ensure_csrf_cookie
 from .models import HangmanGames, HangmanGuesses, TTTMoves
 from .projects.pdf_merger import PDFMerger
 from .projects.password_generator import PasswordGenerator
@@ -30,6 +30,7 @@ def projects(request):
 
 @csrf_protect
 @requires_csrf_token
+@ensure_csrf_cookie
 def pdf_merger(request):
     """
     Returns a page with a demo of the PDF Merger project to try out.
@@ -75,6 +76,7 @@ def pdf_merger(request):
 
 @csrf_protect
 @requires_csrf_token
+@ensure_csrf_cookie
 def password_generator(request):
     """
     Returns a page with a demo of the password generator to try out.
@@ -112,6 +114,7 @@ def password_generator(request):
 
 @csrf_protect
 @requires_csrf_token
+@ensure_csrf_cookie
 def hangman_template(request):
     """
     Returns a page with instructions and allows the user to
@@ -251,6 +254,7 @@ def tic_tac_toe_helper(gs: GameState) -> str:
 
 @csrf_protect
 @requires_csrf_token
+@ensure_csrf_cookie
 def tic_tac_toe(request):
     """
     Returns a page with a demo of the toc-tac-toe game to try out.
