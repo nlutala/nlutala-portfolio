@@ -69,6 +69,7 @@ CSRF_TRUSTED_ORIGINS = [
     "https://nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net/",
     "http://www.nathanlutala.com",
 ]
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ROOT_URLCONF = "portfolio.urls"
 
