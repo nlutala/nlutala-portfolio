@@ -50,9 +50,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: ${{ secrets.AZUREAPPSERVICE_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.AZUREAPPSERVICE_PASSWORD }}
-          POSTGRES_DB: mydb
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: github_actions
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
