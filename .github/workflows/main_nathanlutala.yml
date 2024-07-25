@@ -50,8 +50,8 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_USER: ${{ USER }}
-          POSTGRES_PASSWORD: ${{ PASSWORD }}
+          POSTGRES_USER: ${{ secrets.AZUREAPPSERVICE_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.AZUREAPPSERVICE_PASSWORD }}
           POSTGRES_DB: mydb
         ports:
           - 5432:5432
