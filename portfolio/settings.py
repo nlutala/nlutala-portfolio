@@ -73,7 +73,7 @@ CSRF_COOKIE_DOMAIN = [
     "https://nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net/",
     "http://www.nathanlutala.com",
 ]
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 ROOT_URLCONF = "portfolio.urls"
 
@@ -116,7 +116,10 @@ DATABASES = {
         "NAME": "mydb",
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": "127.0.0.1",
+        "HOST": [
+            "nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net",
+            "www.nathanlutala.com",
+        ],
         "PORT": "5432",
     }
 }
