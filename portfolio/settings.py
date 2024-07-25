@@ -114,11 +114,11 @@ DATABASES = {
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "mydb",
+        "NAME": "defaultdb",
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": "nathanlutala-ddejabbcddefbqbz.ukwest-01.azurewebsites.net",
-        "PORT": "5432",
+        "HOST": "mydb-nathanlutala-c5da.c.aivencloud.com",
+        "PORT": "16686",
     }
 }
 
