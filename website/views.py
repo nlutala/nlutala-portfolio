@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import FileResponse
-from django.views.decorators.csrf import csrf_protect, requires_csrf_token, ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from .models import HangmanGames, HangmanGuesses, TTTMoves
 from .projects.pdf_merger import PDFMerger
 from .projects.password_generator import PasswordGenerator
