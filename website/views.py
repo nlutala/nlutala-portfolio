@@ -29,7 +29,6 @@ def projects(request):
 
 
 @csrf_protect
-@requires_csrf_token
 @ensure_csrf_cookie
 def pdf_merger(request):
     """
@@ -75,7 +74,6 @@ def pdf_merger(request):
 
 
 @csrf_protect
-@requires_csrf_token
 @ensure_csrf_cookie
 def password_generator(request):
     """
@@ -113,7 +111,6 @@ def password_generator(request):
 
 
 @csrf_protect
-@requires_csrf_token
 @ensure_csrf_cookie
 def hangman_template(request):
     """
@@ -253,7 +250,6 @@ def tic_tac_toe_helper(gs: GameState) -> str:
 
 
 @csrf_protect
-@requires_csrf_token
 @ensure_csrf_cookie
 def tic_tac_toe(request):
     """
