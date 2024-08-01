@@ -117,8 +117,8 @@ DATABASES = {
         "NAME": "defaultdb",
         "USER": os.getenv("USER"),
         "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": "mydb-nathanlutala-c5da.c.aivencloud.com",
-        "PORT": "16686",
+        "HOST": os.getenv("HOST"),
+        "PORT": os.getenv("PORT"),
     }
 }
 
